@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Bot</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        .bg-half{
+            min-height:50vh;
+        }
+        .mh-40{
+            min-height: 40vh;
+        }
+
+    </style>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+<body>
+    <div class="min-vw-100 bg-half bg-info"></div>
+    <div class="vw-100 bg-half bg-danger"></div>
+    <div class="vw-100 bg-half bg-warning"></div>
+    <button class="btn bg-info offset-10 col-lg-1 fixed-bottom text-light ">Talk To Some one</button>
+    <div class="">
+        <div class="fixed-bottom offset-lg-8 col-xl-2 col-lg-3 col-md-5 bg-dark mh-40 card rounded-0">
+            <div class=" bg-danger ">
+                <h5 class=" text-monospace card-header">Chat With BOT</h5>
+            </div>
+            <div class="chat-box h-auto text-center card-body">
+                <p class="rounded col-11 bg-secondary">
+                    Hello!
+                </p>
+                <p class="rounded offset-1 col-11 bg-secondary">
+                    Hi!
+                </p>
+                <p class="rounded col-11 bg-secondary">
+                    How are you?
+                </p>
+                <p class="rounded offset-1 col-11 bg-secondary">
+                    Well thanks.. one two three four five six seven
+                </p>
+            </div>
+            <label class="input-group  ">
+
+                <textarea class="rounded-left border-0 col-9 card-footer " placeholder="Send Message..." ></textarea>
+                <input class="rounded-right border-0 bg-success " type="submit" value="SEND">
+            </label>
+
+        </div>
+    </div>
+</body>
+</html>
