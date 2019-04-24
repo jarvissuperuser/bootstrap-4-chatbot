@@ -24,38 +24,50 @@
         <div class="fixed-bottom offset-lg-7 col-xl-3 col-lg-4 offset-md-4 col-md-7 bg-dark mh-40 card rounded-0">
 
                 <h5 class=" text-monospace card-header bg-danger">Chat With BOT</h5>
-            <div class="chat-box h-auto text-center card-body">
-                <div class="input-group m-1">
-                    <div class="rounded-left col-1 bg-danger">b</div>
-                    <div class="rounded-right col-9 bg-secondary">
-                        Hello!
-                    </div>
-                </div>
-                <div class="input-group m-1">
-                    <div class="rounded-left offset-1 col-9 bg-secondary">
-                        Hi!
-                    </div>
-                    <div class="rounded-right col-2 bg-success"></div>
-                </div>
-                <div class="input-group m-1">
-                    <div class="rounded-left col-1 bg-danger">b</div>
-                    <div class="rounded-right col-9 bg-secondary">
-                        How are you?
-                    </div>
-                </div>
-                <div class="input-group m-1">
-                    <div class="rounded-left offset-1 col-9 bg-secondary">
-                        Well thanks... one two three four five six seven
-                    </div>
-                    <div class="rounded-right col-2 bg-success"></div>
-                </div>
+            <div class="chat-box h-auto text-center card-body ">
             </div>
             <label class="input-group  ">
 
                 <textarea class="rounded-left border-0 col-10 card-footer text-warning" placeholder="Send Message..." ></textarea>
-                <input class="rounded-right border-0 bg-success " type="submit" value=">>>">
+                <input class="rounded-right border-0 bg-success " type="submit" value=">>>" onclick="env.reply()">
             </label>
         </div>
     </div>
+    <script >
+        let env = {
+            res:["js/templates/user","js/templates/incoming"],
+            init:()=>{
+                let loader  = async ()=>{
+                    let htmlArray = [];
+                    for (let a of env.res ) {
+                        htmlArray.push(await (await fetch(a,{method:"GET",credentials:"same-origin"})).text());
+                    }
+                    return htmlArray;
+                };
+                let initRunner = async () =>{
+                    env.msgUI = await loader();
+                    return true;
+                };
+                initRunner().then(e=>{console.log(e)});
+            },
+            reply:() => {
+                const msg = document.querySelector("textarea").value;
+                env.display(msg,0);
+            },
+            incoming:(msg = "hello, how may I help?")=>{
+                env.display(msg);
+            },
+            send:()=>{},
+            display:(msg,type=1)=>{
+                let chatBox = document.querySelector(".chat-box");
+                chatBox.innerHTML+=env.msgUI[type];
+                let last = chatBox.querySelectorAll(".msg").length;
+                chatBox.querySelectorAll(".msg")[last - 1].textContent = msg;
+                document.querySelector("textarea").value = "";
+            }
+        };
+
+        env.init();
+    </script>
 </body>
 </html>
